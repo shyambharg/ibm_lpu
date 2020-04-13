@@ -9,11 +9,11 @@ public interface ImageInterface {
 	public Image createImage(Image img);
 	
 
-	public void updateImage(String url,String newUrl);
+	public void updateImage(String url,String newUrl) throws DataNotFoundException;
 	
-	public void deleteImage(String imageUrl);
+	public void deleteImage(String imageUrl) throws DataNotFoundException;
 	
 	public List<Image> displayAll();
 	
-	public Image displayByUrl(String imageUrl);
+	public Image displayByUrl(String imageUrl) throws DataNotFoundException;
 }

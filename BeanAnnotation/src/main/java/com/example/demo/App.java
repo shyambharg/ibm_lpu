@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.example.bean.Image;
+import com.example.repo.DataNotFoundException;
 import com.example.repo.ImageInterface;
 import com.example.service.ImageService;
 import com.example.service.ImageServiceImplement;
@@ -18,7 +19,7 @@ import com.example.service.ImageServiceImplement;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws DataNotFoundException
     {
     	Scanner sc  = new Scanner(System.in);
     	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationcontext.xml");
@@ -52,13 +53,11 @@ public class App
     			
     			
     			imgInterface.updateImageService(imgUrl1,imgUrl2);
-    	    	System.out.println("updated");
-    			break;
+    	    	break;
     		case 3:
-    			System.out.println("Enter the imageUrl to be updated");
+    			System.out.println("Enter the imageUrl to be deleted");
     			String imgUrlDel = sc.next();
     			imgInterface.delete(imgUrlDel);
-    			System.out.println("deleted");
     			break;
     		case 4:
     			List<Image> imgs=imgInterface.displayImageService();

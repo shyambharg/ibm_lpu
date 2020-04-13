@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -47,18 +48,49 @@ public class ImageImplements implements ImageInterface {
 		jdbcTemplate.update(sql,img.getImageId(),img.getImageUrl());
 		return img;
 	}
-	public void updateImage(String imageUrl,String imageNewUrl)
+	public void updateImage(String imageUrl,String imageNewUrl) throws DataNotFoundException
 	{
-		String sql = "update image set imageUrl = ? where imageUrl = ?";
-		jdbcTemplate.update(sql,imageNewUrl,imageUrl);
-		System.out.println("updated");
-		
+		try {
+			String sql = "update image set imageUrl = ? where imageUrl = ?";
+			int a=jdbcTemplate.update(sql,imageNewUrl,imageUrl);
+			if(a == 0)
+			{
+				throw new DataNotFoundException();
+			}
+			else
+			{
+				System.out.println("updated");
+			}
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	public void deleteImage(String imageUrl)
+	public void deleteImage(String imageUrl) throws DataNotFoundException
 	{
-		String sql = "delete from image where imageUrl = ?";
-		jdbcTemplate.update(sql,imageUrl);
-		System.out.println("deleted");
+		try {
+			String sql = "delete from image where imageUrl = ?";
+			int a= jdbcTemplate.update(sql,imageUrl);
+			
+			if(a == 0)
+			{
+				throw new DataNotFoundException();
+			}
+			else
+			{
+				System.out.println("deleted");
+			}
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	public List<Image> displayAll() {
 		
@@ -70,9 +102,28 @@ public class ImageImplements implements ImageInterface {
 		
 		return imgs;
 	}
-	public Image displayByUrl(String imageUrl) {
-		String sql = "select * from image where imageUrl=?";
-		return jdbcTemplate.queryForObject(sql, new Object [] {imageUrl},new ImageMapper());
+	public Image displayByUrl(String imageUrl) throws DataNotFoundException {
+		try {
+			String sql = "select * from image where imageUrl=?";
+			Image img= jdbcTemplate.queryForObject(sql, new Object [] {imageUrl},new ImageMapper());
+			if(img == null)
+			{
+				throw new DataNotFoundException();
+			}
+			else 
+			{
+				return img;
+			}
+			
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 	

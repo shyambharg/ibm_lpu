@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.bean.Image;
+import com.example.repo.DataNotFoundException;
 import com.example.repo.ImageInterface;
 
 @Service
@@ -18,11 +19,11 @@ public class ImageServiceImplement implements ImageService{
 		return imageInterface.createImage(img);
 	}
 
-	public void updateImageService(String imageUrl, String imageNewUrl) {
+	public void updateImageService(String imageUrl, String imageNewUrl) throws DataNotFoundException {
 		imageInterface.updateImage(imageUrl, imageNewUrl);
 	}
 
-	public void delete(String imageUrl) {
+	public void delete(String imageUrl) throws DataNotFoundException{
 		imageInterface.deleteImage(imageUrl);
 	}
 
@@ -30,7 +31,7 @@ public class ImageServiceImplement implements ImageService{
 		return imageInterface.displayAll();
 	}
 
-	public Image displayByUrlService(String imageUrl) {
+	public Image displayByUrlService(String imageUrl) throws DataNotFoundException{
 		return imageInterface.displayByUrl(imageUrl);
 	}
 
