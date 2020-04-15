@@ -1,29 +1,32 @@
 package com.example.repo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.bean.Image;
+import com.example.config.DatabaseConfig;
 import com.example.mapper.ImageMapper;
 
 @Repository
 public class ImageImplements implements ImageInterface {
 
 	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	private static Logger logger=Logger.getLogger("ImageImplements");
+	
 
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	
+	private static Logger logger=Logger.getLogger("ImageImplements");
+	
 	
 	public Image createImage(Image img) {
 //		try {

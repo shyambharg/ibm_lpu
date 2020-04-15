@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.example.bean.Image;
+import com.example.config.AppConfig;
+import com.example.config.DatabaseConfig;
 import com.example.repo.DataNotFoundException;
 import com.example.repo.ImageInterface;
 import com.example.service.ImageService;
@@ -22,7 +26,11 @@ public class App
     public static void main( String[] args ) throws DataNotFoundException
     {
     	Scanner sc  = new Scanner(System.in);
-    	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationcontext.xml");
+    	
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfig.class);
+    	
+    	//for xml configuration
+    	//ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationcontext.xml");
     	ImageService imgInterface = ctx.getBean("imageServiceImplement",ImageServiceImplement.class);
     	
     	int choice = 0;
@@ -74,6 +82,7 @@ public class App
     			break;    			
     		case 6:
     			System.exit(0);
+    			ctx=null;
     			System.out.println("bye");
     			break;
     		default:
