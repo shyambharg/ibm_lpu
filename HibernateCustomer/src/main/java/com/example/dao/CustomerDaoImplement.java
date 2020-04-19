@@ -76,8 +76,7 @@ public class CustomerDaoImplement implements CustomerDao{
 		{
 			Course course= new Course(iter.next());
 			customer.add(course);
-			session.save(course);
-			
+			session.save(course);	
 		}
 		session.getTransaction().commit();
 		
