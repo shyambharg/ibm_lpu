@@ -44,7 +44,21 @@ public class CustomerDaoImplement implements CustomerDao{
 	@Override
 	public void saveCustomer(Customer theCustomer) {
 		Session currentSession = sessionFactory.openSession();
+		currentSession.getTransaction().begin();
 		currentSession.saveOrUpdate(theCustomer);
+		currentSession.getTransaction().commit();
 		
 	}
+
+	@Override
+	public void deleteCustomer(Customer customer) {
+		Session currentSession = sessionFactory.openSession();
+		currentSession.getTransaction().begin();
+		
+		currentSession.delete(customer);
+		currentSession.getTransaction().commit();
+		
+	}
+	
+	
 }
