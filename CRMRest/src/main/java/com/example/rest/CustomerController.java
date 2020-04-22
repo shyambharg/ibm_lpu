@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +40,7 @@ public class CustomerController {
 
 		Customer customer = customerService.getCustomer(customerId);
 		if ( customer==null ) {			
-			throw new CustomerNotFoundException("Customer id not found - " + customerId);
+			throw new CustomerNotFoundException("Customer id -- "+customerId+" not found ");
 		}
 		
 		return customer;
@@ -49,6 +51,13 @@ public class CustomerController {
 	{
 		return new ResponseEntity<CustomerResponseEntity>(new CustomerResponseEntity(HttpStatus.NOT_FOUND.value(),
 				snfe.getMessage(),System.currentTimeMillis()),HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping("/customers/add")
+	public void addCustomer(@RequestBody Customer customer)
+	{
+		customerService.saveCustomer(customer);
+		
 	}
 	
 }
