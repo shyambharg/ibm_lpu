@@ -1,11 +1,15 @@
-package com.example.model;
+package com.example.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name ="instructordetails")
@@ -51,6 +55,28 @@ public class InstructorDetails {
 		this.age = age;
 	}
 	
+	 public InstructorDetails() {
+		// TODO Auto-generated constructor stub
+	}
+	 
+	@JsonBackReference 
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "details")
+	private Instructor instructor;
+
+	public Instructor getInstructor() {
+		return instructor;
+	}
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+	public InstructorDetails(int instructorId, String email, String address, int age, Instructor instructor) {
+		super();
+		this.instructorId = instructorId;
+		this.email = email;
+		this.address = address;
+		this.age = age;
+		this.instructor = instructor;
+	}
 	
 	
 	

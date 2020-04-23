@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.demo.model;
 
 import java.io.Serializable;
 
@@ -11,8 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+
 @Entity
 @Table(name="instructor")
+@ApiModel(description="All details about the Instructor. ")
 public class Instructor implements Serializable {
 	
 	/**
@@ -20,12 +28,19 @@ public class Instructor implements Serializable {
 	 */
 	private static final long serialVersionUID = 2735117253622765732L;
 	
+	@ApiModelProperty(notes = "The database generated ID")
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int id;
+	
+	@ApiModelProperty(notes = "The first name")
 	String firstName;
+	
+	@ApiModelProperty(notes = "The last name")
 	String lastName;
 	
+	
+	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL,targetEntity= InstructorDetails.class)
 	@JoinColumn(name="instructorId")
 	InstructorDetails details;
@@ -71,6 +86,14 @@ public class Instructor implements Serializable {
 	public void setDetails(InstructorDetails details) {
 		this.details = details;
 	}
+	
 
 	
+	public Instructor()
+	{
+		
+	}
+	
+
+//create table instructor (id int primary key auto_increment , firstName varchar(255) , lastName varchar(255));	
 }
