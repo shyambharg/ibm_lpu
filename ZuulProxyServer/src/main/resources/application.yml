@@ -5,12 +5,20 @@ info:
 zuul:
   prefix: /api
   routes:
-    account: 
-      path: /account/**
-      serviceId: account-service
-    customer: 
-      path: /customer/**
-      serviceId: customer-service          
+    movie: 
+      path: /movie/**
+      serviceId: movie-service
+    user: 
+      path: /user/**
+      serviceId: user-service          
+
+  
+#    account: 
+#      path: /account/**
+#      serviceId: account-service
+#    customer: 
+#      path: /customer/**
+#      serviceId: customer-service          
 
 ribbon:
   eureka:
