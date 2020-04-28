@@ -17,4 +17,7 @@ ribbon:
 spring:  
   application:
     name: customer-service
-    
+  h2:
+    console:
+      enabled: true
+      path: /h2           
