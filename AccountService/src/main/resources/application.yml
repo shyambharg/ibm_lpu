@@ -8,7 +8,13 @@ spring:
   h2:
     console:
       enabled: true
-      path: /h2    
+      path: /h2  
+
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:1111        
 
 eureka:  
   client:
@@ -21,3 +27,4 @@ eureka:
 ribbon:
   eureka:
     enabled: true   
+    
