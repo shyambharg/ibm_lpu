@@ -1,13 +1,13 @@
 package com.example.demo.controller.exception;
 
-public class UserNotFoundException extends Throwable {
+public class UserNotFoundException extends RuntimeException{
 
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4563364728717702901L;
-
-	
+	private static final long serialVersionUID = -8996971162813553313L;
 	private String message;
 
 

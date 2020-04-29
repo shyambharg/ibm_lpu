@@ -16,8 +16,14 @@ public class UserServiceImplement implements UserService {
 
 	@Override
 	public User getUserById(Integer id) {
-		return userDao.findById(id).get();
 		
+		try {
+			return userDao.findById(id).get();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -26,7 +26,7 @@ public class MovieServiceImplement implements MovieService{
 		
 		List<Movie> movies= new ArrayList<Movie>();
 		
-		movieDao.findAll().forEach(movie -> { movies.add(new Movie(movie.getMovieName(),movie.getGenre()));}
+		movieDao.findAll().forEach(movie -> { movies.add(new Movie(movie.getMovieId(),movie.getMovieName(),movie.getGenre()));}
 		);
 		if(restTemplate.getForObject("http://user-service/users/"+id, Object.class)!=null) 
 		{
@@ -37,6 +37,45 @@ public class MovieServiceImplement implements MovieService{
 			return null;
 		}
 	}
+
+
+	@Override
+	public Movie addMovie(Movie movie, Integer id) {
+		
+		if(restTemplate.getForObject("http://user-service/users/"+id, Object.class)!=null)
+		{
+			movieDao.save(movie);
+		}
+		return movie;
+	}
+
+
+	@Override
+	public Movie updateMovie(Movie movie, Integer id) {
+		if(restTemplate.getForObject("http://user-service/users/"+id, Object.class)!=null)
+		{
+			movieDao.save(movie);
+		}
+		
+		return movie;
+	}
+
+
+	@Override
+	public void deleteMovie(Integer movieId, Integer id) {
+		if(restTemplate.getForObject("http://user-service/users/"+id, Object.class)!=null)
+		{
+			Movie movie = movieDao.findById(movieId).get();
+			movieDao.delete(movie);
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
 
 	
 }

@@ -40,4 +40,4 @@ logging:
 
 spring:
   application:
-    name: gateway-server    
+    name: gateway-server
