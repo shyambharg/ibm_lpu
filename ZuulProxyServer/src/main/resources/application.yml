@@ -2,15 +2,15 @@ info:
   component: Edge Server
 
 
-zuul:
-  prefix: /api
-  routes:
-    movie: 
-      path: /movie/**
-      serviceId: movie-service
-    user: 
-      path: /user/**
-      serviceId: user-service          
+#zuul:
+#  prefix: /api
+#  routes:
+#    product: 
+#        path: /product/**
+#        serviceId: product-service
+#     user: 
+#      path: /user/**
+#      serviceId: user-service          
 
   
 #    account: 
@@ -20,15 +20,15 @@ zuul:
 #      path: /customer/**
 #      serviceId: customer-service          
 
-ribbon:
-  eureka:
-    enabled: true
+#ribbon:
+#  eureka:
+#    enabled: true
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: false
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+#    registerWithEureka: false
       
 server:
   port: 8765
@@ -41,3 +41,11 @@ logging:
 spring:
   application:
     name: gateway-server
+  cloud:
+    consul:
+      discovery:
+        register: true
+        service-name: proxy-service
+      host: localhost
+      port: 8500  
+  
